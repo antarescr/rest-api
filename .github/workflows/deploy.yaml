@@ -1,0 +1,44 @@
+name: deploy
+on:
+  push:
+    branches: [ "main" ]
+env:
+  REGISTRY: antarescr
+  IMAGE_NAME: rest_api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    #Setear Outputs:
+    #outputs:
+    #  RELEASE_VERSION: ${{ steps.tagVersion.outputs.RELEASE_VERSION }}
+    steps:
+      - uses: actions/checkout@v3 # checkout github code
+        name: Checkout code
+        with:
+          fetch-depth: 0 # fetch tags
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      #- name: Get TAG version
+      ##Crear variable dinamicamente >> $GITHUB_ENV lo mete en variable de Gitactions
+      #  run: echo "RELEASE_VERSION=$(git tag --sort=-creatordate | head -1)" >> $GITHUB_ENV
+      #- name: Show Tag Version
+      #  id: tagVersion
+      #  run: |
+      #    echo ${{ env.RELEASE_VERSION }}
+      #    # Crea una variable tipo output para ser utilizada en otro JOB
+      #    echo "RELEASE_VERSION=${{ env.RELEASE_VERSION }}" >> $GITHUB_OUTPUT
+      - name: Build & Push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          # file: ./path-to-dockerfile
+          #Agrega version como latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          #Pone en el tag el valor de la version en variable RELEASE_VERSION
+          #tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+          #build-args: |
+          #  APP_ENV=${{ secrets.APP_ENV }}
