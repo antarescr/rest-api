@@ -40,5 +40,5 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           #Pone en el tag el valor de la version en variable RELEASE_VERSION
           #tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
-          #build-args: |
-          #  APP_ENV=${{ secrets.APP_ENV }}
+          build-args: |
+            APP_ENV=${{ secrets.APP_ENV }}
