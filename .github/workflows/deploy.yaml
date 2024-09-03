@@ -42,3 +42,15 @@ jobs:
           #tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
           build-args: |
             APP_ENV=${{ secrets.APP_ENV }}
+  test:
+    name: Run test
+    needs: build
+    run-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run test
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npm run test
