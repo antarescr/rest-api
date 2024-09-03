@@ -61,4 +61,4 @@ jobs:
       - name: Test failed?
         if: ${{ failure()}}
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.IMAGE_NAME }} test failed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":" ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} test failed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
