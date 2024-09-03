@@ -55,3 +55,10 @@ jobs:
           node-version: "20"
       - run: npm install
       - run: npm run test
+      - name: Test succeded?
+        if: ${{ success()}}
+        run: echo "Test succeded!"
+      - name: Test failed?
+        if: ${{ failure()}}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.IMAGE_NAME }} test failed"}' ${{ secrets.SLACK_WEBHOOK_URL }}
