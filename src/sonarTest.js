@@ -28,6 +28,11 @@ console.log(calculateAge(1990));
 console.log(calculateUserAge({ yearOfBirth: 1990 }));
 console.log(unsafeFunction("2 + 2")); // Potencial problema de seguridad
 
+console.log('sonar test')
+console.log('sonar test')
+console.log('sonar test')
+console.log('sonar test')
+
 export default {
   unsafeFunction,
 };
