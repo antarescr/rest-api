@@ -33,11 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       #Actions pueda escribir lo que ocupe
-      security-events: write
+      #security-events: write
       issues: write
-      packages: read
-      actions: read
-      contents: read
+      #packages: read
+      #actions: read
+      #contents: read
     steps:
       - uses: actions/checkout@v3
         name: Checkout code
