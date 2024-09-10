@@ -43,4 +43,5 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-api-scan@v0.7.0
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://localhost:3000/search?q=123'
