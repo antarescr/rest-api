@@ -1,0 +1,30 @@
+name: deploy
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: SAST Test
+
+		runs-on: ubuntu-latest
+
+    permissions:
+      #Actions pueda escribir lo que ocupe
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout code
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'javascript'
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
