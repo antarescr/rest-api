@@ -2,7 +2,8 @@ name: deploy
 
 on:
   push:
-    branches: ["main"]
+    #Se cambia nombre del branch para evitar que se ejecute para ejecutar otros labs nombre original: main
+    branches: ["main-test"]
 
 jobs:
   build:

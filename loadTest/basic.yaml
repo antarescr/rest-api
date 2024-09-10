@@ -1,0 +1,36 @@
+config:
+  target: "http://localhost:3000"
+  plugins:
+    expect: {}
+    ensure:
+      p95: 200 # 95% < 200ms; para ser satisfactorio.
+      maxErrorRate: 2 # 2% de error permitido (timeouts, server error, bad request, etc.)
+
+  phases:
+    - duration: 5
+      arrivalRate: 1 # 1 request/s
+      name: "Warming up"
+
+    - duration: 10
+      arrivalRate: 2 # 2 request/s
+      rampTo: 100 # hasta 100 request/s en 7segundos
+      name: "Ramping up"
+
+    - duration: 15
+      arrivalRate: 10 # 10 request/s
+      name: "Sustained load"
+
+scenarios:
+  - name: "Healthcheck"
+    flow:
+      - get:
+          url: "/healthcheck"
+          expect:
+            - statusCode: 200
+
+  - name: "Delay"
+    flow:
+      - get:
+          url: "/delay?seconds=0.1"
+          expect:
+            - statusCode: 200

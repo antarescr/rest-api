@@ -24,6 +24,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "artillery-plugin-ensure": "^1.14.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^4.3.0",
