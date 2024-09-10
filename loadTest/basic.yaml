@@ -31,6 +31,6 @@ scenarios:
   - name: "Delay"
     flow:
       - get:
-          url: "/delay?seconds=0.1"
+          url: "/delay?seconds=0.201"
           expect:
             - statusCode: 200
