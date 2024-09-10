@@ -8,7 +8,7 @@ jobs:
   build:
     name: SAST Test
 
-		runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     permissions:
       #Actions pueda escribir lo que ocupe
